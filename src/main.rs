@@ -15,6 +15,23 @@ impl TestApp {
 
     fn render_buttons(&mut self, ui: &mut egui::Ui) {
         ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
+            if ui.add(egui::Button::new("clear").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+                self.value = String::new();
+            }
+
+            if ui.add(egui::Button::new("^").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+            }
+
+            if ui.add(egui::Button::new("9").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+            }
+
+            if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+            }
+        });
+
+        ui.add_space(5.0);
+
+        ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
             if ui.add(egui::Button::new("7").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
                 self.value += "7";
             }
@@ -27,7 +44,12 @@ impl TestApp {
                 self.value += "9";
             }
 
+            if ui.add(egui::Button::new("÷").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+            }
+
         });
+
+        ui.add_space(5.0);
 
         ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
             if ui.add(egui::Button::new("4").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
@@ -42,8 +64,11 @@ impl TestApp {
                 self.value += "6";
             }
 
+            if ui.add(egui::Button::new("*").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+            }
         });
 
+        ui.add_space(5.0);
 
         ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
             if ui.add(egui::Button::new("1").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
@@ -57,12 +82,26 @@ impl TestApp {
             if ui.add(egui::Button::new("3").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
                 self.value += "3";
             }
+
+            if ui.add(egui::Button::new("-").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+            }
         });
 
+        ui.add_space(5.0);
 
         ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
             if ui.add(egui::Button::new("0").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
                 self.value += "0";
+            }
+
+            if ui.add(egui::Button::new(".").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+                self.value += ".";
+            }
+
+            if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
+            }
+
+            if ui.add(egui::Button::new("+").min_size(egui::Vec2::new(100.0, 100.0))).clicked() {
             }
         });
     }
