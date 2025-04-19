@@ -13,100 +13,64 @@ impl TestApp {
         }
     }
 
-    fn render_buttons(&mut self, ui: &mut egui::Ui) {
-        const BUTTON_PADDING_VERTICAL: f32 = 50.0;
-        const BUTTON_PADDING_HORIZONTAL: f32 = 50.0;
+    fn render_buttons(&mut self, ctx: &egui::Context, ui: &mut egui::Ui) {
+        let screen: egui::Rect = ctx.input(|i: &egui::InputState| i.screen_rect());
+        let width = (&screen.max.x - &screen.min.x - 40.0) * 0.25;
+        let height = (&screen.max.y - &screen.min.y - 80.0) * 0.20;
 
-        //TODO: generate buttons with foreach
-        ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
-            if ui.add(egui::Button::new("clear").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+        egui::Grid::new("button_panel").show(ui, |ui| {
+            if ui.add(egui::Button::new("CE").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value = String::new();
             }
+            if ui.add(egui::Button::new("C").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("^").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("÷").min_size(egui::Vec2::new(width, height))).clicked() {}
+            ui.end_row();
 
-            if ui.add(egui::Button::new("^").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
-
-            if ui.add(egui::Button::new("9").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
-
-            if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
-        });
-
-        ui.add_space(5.0);
-
-        ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
-            if ui.add(egui::Button::new("7").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("7").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "7";
             }
-
-            if ui.add(egui::Button::new("8").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("8").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "8"
             }
-
-            if ui.add(egui::Button::new("9").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("9").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "9";
             }
+            if ui.add(egui::Button::new("*").min_size(egui::Vec2::new(width, height))).clicked() {}
+            ui.end_row();
 
-            if ui.add(egui::Button::new("÷").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
-
-        });
-
-        ui.add_space(5.0);
-
-        ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
-            if ui.add(egui::Button::new("4").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("4").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "4";
             }
-
-            if ui.add(egui::Button::new("5").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("5").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "5"
             }
-
-            if ui.add(egui::Button::new("6").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("6").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "6";
             }
+            if ui.add(egui::Button::new("-").min_size(egui::Vec2::new(width, height))).clicked() {}
+            ui.end_row();
 
-            if ui.add(egui::Button::new("*").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
-        });
-
-        ui.add_space(5.0);
-
-        ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
-            if ui.add(egui::Button::new("1").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("1").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "1";
             }
-
-            if ui.add(egui::Button::new("2").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("2").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "2";
             }
-
-            if ui.add(egui::Button::new("3").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("3").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "3";
             }
+            if ui.add(egui::Button::new("+").min_size(egui::Vec2::new(width, height))).clicked() {}
+            ui.end_row();
 
-            if ui.add(egui::Button::new("-").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
-        });
-
-        ui.add_space(5.0);
-
-        ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
-            if ui.add(egui::Button::new("0").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new("%").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("0").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "0";
             }
-
-            if ui.add(egui::Button::new(".").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
+            if ui.add(egui::Button::new(".").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += ".";
             }
-
-            if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
-
-            if ui.add(egui::Button::new("+").min_size(egui::Vec2::new(BUTTON_PADDING_VERTICAL, BUTTON_PADDING_HORIZONTAL))).clicked() {
-            }
+            if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(width, height))).clicked() {}
         });
     }
 }
@@ -121,7 +85,7 @@ impl eframe::App for TestApp {
         });
 
         CentralPanel::default().show(ctx, |ui: &mut egui::Ui| {
-            self.render_buttons(ui);
+            self.render_buttons(ctx, ui);
         });
     }
 }
