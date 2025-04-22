@@ -1,6 +1,8 @@
 use eframe::{NativeOptions, run_native};
 use egui::{CentralPanel, RichText, TopBottomPanel};
 
+mod lib;
+
 #[derive(Default)]
 struct TestApp {
     value: String,
