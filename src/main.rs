@@ -1,7 +1,7 @@
 use eframe::{NativeOptions, run_native};
 use egui::{CentralPanel, RichText, TopBottomPanel};
 
-mod lib;
+use calculator;
 
 #[derive(Default)]
 struct TestApp {
@@ -25,8 +25,12 @@ impl TestApp {
                 self.value = String::new();
             }
             if ui.add(egui::Button::new("C").min_size(egui::Vec2::new(width, height))).clicked() {}
-            if ui.add(egui::Button::new("^").min_size(egui::Vec2::new(width, height))).clicked() {}
-            if ui.add(egui::Button::new("÷").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("^").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += "^";
+            }
+            if ui.add(egui::Button::new("÷").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += "/";
+            }
             ui.end_row();
 
             if ui.add(egui::Button::new("7").min_size(egui::Vec2::new(width, height))).clicked() {
@@ -38,7 +42,9 @@ impl TestApp {
             if ui.add(egui::Button::new("9").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "9";
             }
-            if ui.add(egui::Button::new("*").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("*").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += "*";
+            }
             ui.end_row();
 
             if ui.add(egui::Button::new("4").min_size(egui::Vec2::new(width, height))).clicked() {
@@ -50,7 +56,9 @@ impl TestApp {
             if ui.add(egui::Button::new("6").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "6";
             }
-            if ui.add(egui::Button::new("-").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("-").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += "-";
+            }
             ui.end_row();
 
             if ui.add(egui::Button::new("1").min_size(egui::Vec2::new(width, height))).clicked() {
@@ -62,7 +70,9 @@ impl TestApp {
             if ui.add(egui::Button::new("3").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "3";
             }
-            if ui.add(egui::Button::new("+").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("+").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += "+";
+            }
             ui.end_row();
 
             if ui.add(egui::Button::new("%").min_size(egui::Vec2::new(width, height))).clicked() {}
@@ -72,7 +82,9 @@ impl TestApp {
             if ui.add(egui::Button::new(".").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += ".";
             }
-            if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(width, height))).clicked() {}
+            if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value = calculator::translate_infix_to_postfix(self.value.clone());
+            }
         });
     }
 }
