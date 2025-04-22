@@ -83,6 +83,7 @@ impl TestApp {
                 self.value += ".";
             }
             if ui.add(egui::Button::new("=").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += " ";
                 self.value = calculator::translate_infix_to_postfix(self.value.clone());
             }
         });

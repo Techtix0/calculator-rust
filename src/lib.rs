@@ -69,10 +69,14 @@ pub fn translate_infix_to_postfix(input: String) -> String {
                 } else if priority.get(&input_next.unwrap())
                     <= priority.get(&stack.peek().unwrap().chars().nth(0).unwrap())
                 {
-                    while priority.get(&stack.peek().unwrap().chars().nth(0).unwrap())
+                    let msg: String = String::from("Has None value");
+
+                    while priority
+                        .get(&stack.peek().unwrap_or_else(|| &msg).chars().nth(0).unwrap())
                         >= priority.get(&input_next.unwrap())
                     {
                         result.push_str(&stack.pop().unwrap());
+                        result.push_str(" ");
                     }
 
                     stack.push(input_next.unwrap().to_string());
@@ -81,9 +85,20 @@ pub fn translate_infix_to_postfix(input: String) -> String {
             ')' => {
                 while stack.peek().unwrap() != &String::from('(') {
                     result.push_str(&stack.pop().unwrap());
+                    result.push_str(" ");
                 }
                 stack.pop();
             }
+            ' ' => {
+                if !current_number.is_empty() {
+                    result.push_str(&current_number.as_str());
+                    result.push_str(" ");
+                    current_number = String::new();
+                } else {
+                    panic!("A number is missing before the operator!");
+                };
+            }
+
             _ => {}
         };
 
@@ -91,6 +106,7 @@ pub fn translate_infix_to_postfix(input: String) -> String {
     }
     while !stack.is_empty() {
         result.push_str(&stack.pop().unwrap());
+        result.push_str(" ");
     }
 
     result
