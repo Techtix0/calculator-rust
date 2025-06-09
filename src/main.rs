@@ -16,9 +16,12 @@ impl TestApp {
     }
 
     fn render_buttons(&mut self, ctx: &egui::Context, ui: &mut egui::Ui) {
+        const NUMBER_OF_BUTTONS_X: f32 = 5.0;
+        const NUMBER_OF_BUTTONS_Y: f32 = 5.0;
+
         let screen: egui::Rect = ctx.input(|i: &egui::InputState| i.screen_rect());
-        let width = (&screen.max.x - &screen.min.x - 40.0) * 0.25;
-        let height = (&screen.max.y - &screen.min.y - 80.0) * 0.20;
+        let width = (&screen.max.x - &screen.min.x - 50.0) * (1.0 / NUMBER_OF_BUTTONS_X);
+        let height = (&screen.max.y - &screen.min.y - 80.0) * (1.0 / NUMBER_OF_BUTTONS_Y);
 
         egui::Grid::new("button_panel").show(ui, |ui| {
             if ui.add(egui::Button::new("CE").min_size(egui::Vec2::new(width, height))).clicked() {
@@ -30,6 +33,9 @@ impl TestApp {
             }
             if ui.add(egui::Button::new("÷").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "/";
+            }
+            if ui.add(egui::Button::new("(").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += "(";
             }
             ui.end_row();
 
@@ -44,6 +50,9 @@ impl TestApp {
             }
             if ui.add(egui::Button::new("*").min_size(egui::Vec2::new(width, height))).clicked() {
                 self.value += "*";
+            }
+            if ui.add(egui::Button::new(")").min_size(egui::Vec2::new(width, height))).clicked() {
+                self.value += ")";
             }
             ui.end_row();
 
